@@ -1,0 +1,202 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>【2021-2021】暖通系统在线优化方法及其理论推导 | mafanhe</title>
+<meta name="description" content="High Tech &amp; High Life">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://www.mafanhe.com/favicon.ico?v=1672475625167">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://www.mafanhe.com/styles/main.css">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://www.mafanhe.com">
+        <img class="avatar" src="https://www.mafanhe.com/images/avatar.png?v=1672475625167" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://www.mafanhe.com">
+        <h1 class="site-title">mafanhe</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+          <h2 class="post-title">【2021-2021】暖通系统在线优化方法及其理论推导</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2021-12-09</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://www.mafanhe.com/tag/K9l5X15oN/">
+                    在线优化
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://www.mafanhe.com/tag/92ANqqaUgf/">
+                    机器学习
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://www.mafanhe.com/tag/eYL-46K4NV/">
+                    暖通系统
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content" v-pre>
+            <p>阅读本文，请先了解上篇文章:<a href=""></a></p>
+<h2 id="online-optimization">ONLINE OPTIMIZATION</h2>
+<p>最优化控制问题常用的优化方法是基于模型的两步算法，首先对系统识别并建立模型，然 后求解最优控制参数基于系统识别模型和参数约束。<br>
+chiller plants 优化目标函数为：<br>
+<img src="https://www.mafanhe.com/post-images/1670580353754.png" alt="" loading="lazy"><br>
+fchiller is chiller power model，ffan is tower fan power model，并且已知。fcow pump is cooling water pump，并且已知。J是chiller power model的损失函数。 将公式17代入公式1得到:<br>
+<img src="https://www.mafanhe.com/post-images/1670580369773.png" alt="" loading="lazy"><br>
+精确地估计最佳控制参数c需要精确的识别系统模型f(c, s; θ)。但这种方法应用到真实物理 系统的时候会面临两个主要问题。<br>
+1.系统识别的问题。需要收集一定量并且特征分布稠密的数据进行系统识别建模。但由于 成本与风险问题，数据规模一般比较小，且特征分布稀疏。<br>
+2.系统发生变化的问题。当系统经过老化，维修，更换，升级等等变化时，必须再次收集 数据进行新系统的识别与模型更新。<br>
+为了简化基于模型的两步算法并克服上述两个问题我们设计了一种在线优化算法。 我们的算法假设优化目标是一个未知的凸函数，如果该目标函数在某点的梯度可以有 偏估计，那么使用梯度下降算法即可迭代收敛最优控制参数，同时有偏估计的偏置趋 于0。algorithm see 2, 收敛推导证明see A.1。 该算法的关键是如何在无目标函数的情况下估计有偏梯度，这听起来似乎是不可完成的任务。<br>
+<img src="https://www.mafanhe.com/post-images/1670580528879.png" alt="" loading="lazy"><br>
+假设在一个可交互的系统中，我们要优化的目标是一个未知的凸函数，函数的输入变量皆 为连续值，与系统交互后产生的样本可获取。那么我们可以使用探索控制的方法采集到样 本集合(控制变量在某点附近的的)。使用OLS线性估计方法，这些样本可以被用来估计控制 变量关于未知目标函数在某点的梯度，然后使用梯度下降算法更新控制变量。重复上述步 骤则最终收敛至最优控制参数。see Algorithm 3。需要证明的是OLS线性估计是否为渐近无 偏的梯度估计方法。see proof A.1<br>
+<img src="https://www.mafanhe.com/post-images/1670580460204.png" alt="" loading="lazy"></p>
+<p>identification step：那么基于recent k 个样本使用OLS线性估计法计算未知目标函数在改点 下的梯度。Or we can use gradient descent to update θ 防止 θ 变化过快.(k ≥ d + 1,最小样本容量的下限,一般k ≥ 30 或至少k ≥ 3(d + 1) 满足模型估计的基本要求)<br>
+<img src="https://www.mafanhe.com/post-images/1670580844826.png" alt="" loading="lazy"></p>
+<p>optimization step：基于identification step计算出的有偏估计的梯度，使用梯度下降更新系统 的控制参数,P is a projection function, At each time step, ct+1 is not necessarily in Ct. We modify the proposed gradient descent algorithm so that ct+1 is projected back into Ct set at each time step, Ct = [ct − δ, ct + δ]. or we use another update method to do that.<br>
+<img src="https://www.mafanhe.com/post-images/1670580855752.png" alt="" loading="lazy"></p>
+<p>explore and exploit：将高斯随机噪声加入控制参数。其目的是丰富数据，增加梯度估计的 准确率。然后生成控制指令传输至系统。 等待一个时间步后，然后再次基于recent样本去估计控制参数的梯度。整个过程被循环执 行，控制参数会越来越接近真实的最优参数。 简而言之AOI算法是在系统识别模型全局未知（局部可知）的情况下，估计真实梯度进而求 得最优控制参数，并且是一种在线交互trial and error算法。 该算法在chiller plants optimization control 的一个实例如下，see Algorithm 4，see experience A.2。<br>
+<img src="https://www.mafanhe.com/post-images/1670580878785.png" alt="" loading="lazy"></p>
+<h2 id="a-appendix">A APPENDIX</h2>
+<h3 id="a1-aoi-proof">A.1 AOI PROOF</h3>
+<p>AOI algorithm convergence proof experiment<br>
+Why Does the AOI Algorithm Work ? In online convex optimization, the optimizer does not know any information about the objective function except its convexity. At each iteration, the optimizer chooses a feasible solution and obtains some information about the objective function at that feasible solution. All of other useful algorithms require the availability of an unbiased estimate of the gradient, which is not the case in our setting. Thus, we extend the results of stochastic online convex optimization to allow for biased gradient estimates. We show that even with biased gradients, the descent algorithm still converges to the optimal solution at the same asymptotic rate, provided that the bias is sufficiently “small” and ”asymptotically to zero”. This is a problem where we dont’t know the function we are optimizing but we can estimators it’s gradient by consistent biased estimate online.<br>
+本文将会提出3个定理进行证明，证得其收敛性。<br>
+<img src="https://www.mafanhe.com/post-images/1670578839857.png" alt="" loading="lazy"></p>
+<figure data-type="image" tabindex="1"><img src="https://www.mafanhe.com/post-images/1670578765309.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://www.mafanhe.com/post-images/1670581302131.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="3"><img src="https://www.mafanhe.com/post-images/1670581504564.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="4"><img src="https://www.mafanhe.com/post-images/1670581518979.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="5"><img src="https://www.mafanhe.com/post-images/1670581536763.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="6"><img src="https://www.mafanhe.com/post-images/1670581596298.png" alt="" loading="lazy"></figure>
+<h3 id="a2-aoi-experience-proof">A.2 AOI EXPERIENCE PROOF</h3>
+<p><img src="https://www.mafanhe.com/post-images/1670581618780.png" alt="" loading="lazy"><br>
+<img src="https://www.mafanhe.com/post-images/1670581634360.png" alt="" loading="lazy"></p>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://www.mafanhe.com/post/yi-chong-dan-diao-shen-jing-wang-luo-ji-qi-zai-nuan-tong-xi-tong-neng-xiao-you-hua-zhong-de-ying-yong/">
+              <h3 class="post-title">
+                下一篇：【2020-2021】一种单调神经网络及其在暖通系统能效优化中的应用
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+
+      <div class="site-footer">
+  <div class="slogan">High Tech & High Life</div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+  <a href="https://beian.miit.gov.cn/" target="_blank">苏ICP备15059045号</a> | <a class="rss" href="https://www.mafanhe.com/atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+  </body>
+</html>
